@@ -1,19 +1,26 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Anagrama.RewersWords;
 using System;
+using System.Text;
 
 namespace AnagramaTest
 {
     [TestClass]
     public class AnagramaTest
     {
+        private Anagram anagram;
+
+        [TestInitialize]
+        public void TestSetUp()
+        {
+            anagram = new Anagram();
+        }
+
         [TestMethod]
         public void TestMethodShortString()
         {
-            string input = "q1w";
-            string expected = "w1q";
-
-            var anagram = new Anagram();
+            var input = "q1w";
+            var expected = "w1q";
 
             Assert.AreEqual(expected, anagram.rewSentence(input));
         }
@@ -21,10 +28,8 @@ namespace AnagramaTest
         [TestMethod]
         public void TestMethodShortString1()
         {
-            string input = "q1w as3d";
-            string expected = "w1q ds3a";
-
-            var anagram = new Anagram();
+            string input = "q1w as3d333";
+            string expected = "w1q ds3a333";
 
             Assert.AreEqual(expected, anagram.rewSentence(input));
         }
@@ -33,7 +38,6 @@ namespace AnagramaTest
         public void CheckEmptyStringTest()
         {
             var input = string.Empty;
-            var anagram = new Anagram();
             Assert.ThrowsException<Exception>(() => anagram.rewSentence(input));
         }
 
@@ -41,8 +45,7 @@ namespace AnagramaTest
         public void CheckNullStringTest()
         {
             string input = null;
-            var anagram = new Anagram();
-            Assert.ThrowsException<NullReferenceException>(() => anagram.rewSentence(input));
+            Assert.ThrowsException<Exception>(() => anagram.rewSentence(input));
         }
     }
 }
